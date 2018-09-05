@@ -32,8 +32,13 @@ ENV maven.home $M2_HOME
 ENV M2 $M2_HOME/bin
 ENV PATH $M2:$PATH
 
+# Add jenkins user with hardcoded ID (the one that jenkins expects)
 RUN groupadd -g 10000 jenkins && \
     adduser -u 10000 -d /home/jenkins -g jenkins jenkins
+
+# Allow Jenkins user to run docker
+RUN groupadd docker && \
+    usermod -aG docker jenkins
 
 # Again using non-root user i.e. stakater as set in base image
 USER jenkins
