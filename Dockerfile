@@ -39,7 +39,7 @@ RUN groupadd -g 10000 jenkins && \
 
 # Allow Jenkins user to run docker
 RUN groupadd docker && \
-    usermod -aG docker 10000
+    usermod -aG docker jenkins
 
 # Again using non-root user i.e. stakater as set in base image
 USER jenkins
