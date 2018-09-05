@@ -1,4 +1,7 @@
+FROM docker:17.09.1-ce as docker
 FROM stakater/java-centos:7-1.8
+
+COPY --from=docker /usr/local/bin/docker /usr/local/bin/
 
 LABEL name="Stakater Maven Image on CentOS" \    
       maintainer="Stakater <stakater@aurorasolutions.io>" \
