@@ -1,7 +1,8 @@
-FROM docker:17.09.1-ce as docker
+FROM docker:17.12.0-ce as docker
 FROM stakater/java-centos:7-1.8
 
-COPY --from=docker /usr/local/bin/docker /usr/local/bin/
+COPY --from=docker /usr/local/bin/docker /usr/bin/
+ENV DOCKER_API_VERSION=1.32
 
 LABEL name="Stakater Maven Image on CentOS" \    
       maintainer="Stakater <stakater@aurorasolutions.io>" \
@@ -38,7 +39,7 @@ RUN groupadd -g 10000 jenkins && \
 
 # Allow Jenkins user to run docker
 RUN groupadd docker && \
-    usermod -aG docker jenkins
+    usermod -aG docker 10000
 
 # Again using non-root user i.e. stakater as set in base image
 USER jenkins
