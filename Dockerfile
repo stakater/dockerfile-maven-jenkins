@@ -19,7 +19,7 @@ USER root
 # Install required tools
 # which: otherwise 'mvn version' prints '/usr/share/maven/bin/mvn: line 93: which: command not found'
 RUN yum update -y && \
-  yum install -y which git && \
+  yum install -y which git sudo && \
   yum clean all
 
 # Maven
@@ -35,7 +35,8 @@ ENV PATH $M2:$PATH
 
 # Add jenkins user with hardcoded ID (the one that jenkins expects)
 RUN groupadd -g 10000 jenkins && \
-    adduser -u 10000 -d /home/jenkins -g jenkins jenkins
+    adduser -u 10000 -d /home/jenkins -g jenkins jenkins && \
+    passwd -d jenkins
 
 # Allow Jenkins user to run docker
 RUN groupadd docker && \
