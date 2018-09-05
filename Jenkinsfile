@@ -3,5 +3,5 @@
 
 pushDockerImage {
     dockerRegistryURL = "docker.io"
-    imageVersion = "7-1.8-3.5.4"
+    imageVersion = "3.5.4-0.1"
 }
